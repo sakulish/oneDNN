@@ -39,8 +39,11 @@ while [[ $# -gt 0 ]]; do
 done
 
 
+export DNNL_VERBOSE=1
+
 if [ "$(uname)" == "Linux" ]; then
     export OMP_NUM_THREADS="$(grep -c processor /proc/cpuinfo)"
+    lscpu
 else
     export OMP_NUM_THREADS="$(sysctl -n hw.physicalcpu)"
 fi
@@ -48,7 +51,7 @@ fi
 if [ "${TEST_KIND}" == "gtest" ]; then
     CTEST_OPTS="-E benchdnn"
 elif [ "${TEST_KIND}" == "benchdnn" ]; then
-    CTEST_OPTS="-R benchdnn --verbose"
+    CTEST_OPTS="-R test_benchdnn_conv_ci_cpu --verbose"
 else
     echo "Error: unknown test kind: ${TEST_KIND}"
     exit 1

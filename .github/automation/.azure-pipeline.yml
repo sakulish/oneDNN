@@ -55,6 +55,10 @@ jobs:
           .github/automation/test.sh --test-kind gtest --build-dir $(pwd)/build --report-dir $(pwd)/report
         displayName: 'test'
         failOnStderr: true
+      - script: |
+          .github/automation/test.sh --test-kind benchdnn --build-dir $(pwd)/build --report-dir $(pwd)/report
+        displayName: 'benchdnn'
+        failOnStderr: true
   - job: 'Ubuntu18'
     pool:
       vmImage: 'ubuntu-18.04'
@@ -79,6 +83,10 @@ jobs:
           .github/automation/test.sh --test-kind gtest --build-dir $(pwd)/build --report-dir $(pwd)/report
         displayName: 'test'
         failOnStderr: true
+      - script: |
+          .github/automation/test.sh --test-kind benchdnn --build-dir $(pwd)/build --report-dir $(pwd)/report
+        displayName: 'benchdnn'
+        failOnStderr: true
   - job: 'OSX_10_14'
     pool:
       vmImage: 'macOS-10.14'
@@ -90,6 +98,10 @@ jobs:
           .github/automation/test.sh --test-kind gtest --build-dir $(pwd)/build --report-dir $(pwd)/report
         displayName: 'test'
         failOnStderr: true 
+      - script: |
+          .github/automation/test.sh --test-kind benchdnn --build-dir $(pwd)/build --report-dir $(pwd)/report
+        displayName: 'benchdnn'
+        failOnStderr: true
   - job: 'Windows_Server_2019'
     pool:
       vmImage: 'windows-2019'
@@ -101,7 +113,11 @@ jobs:
          .github\automation\test.bat /TESTKIND gtest /BUILDDIR %CD%\build /MODE Release /REPORTDIR %CD%\report
         displayName: 'test'
         failOnStderr: true 
-  - job: 'Windows_Server_2012'
+      - script: |
+          .github\automation\test.bat /TESTKIND benchdnn /BUILDDIR %CD%\build /MODE Release /REPORTDIR %CD%\report
+        displayName: 'benchdnn'
+        failOnStderr: true
+  - job: 'Windows_Server_2016'
     pool:
       vmImage: 'vs2017-win2016'
     steps:
@@ -111,4 +127,8 @@ jobs:
       - script: |
          .github\automation\test.bat /TESTKIND gtest /BUILDDIR %CD%\build /MODE Release /REPORTDIR %CD%\report
         displayName: 'test'
+        failOnStderr: true
+      - script: |
+          .github\automation\test.bat /TESTKIND benchdnn /BUILDDIR %CD%\build /MODE Release /REPORTDIR %CD%\report
+        displayName: 'benchdnn'
         failOnStderr: true
